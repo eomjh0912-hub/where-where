@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WHERE WHERE 브랜드 스토리</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* layout: one reading column, broken by a FROM / TO photo pair that mirrors the brand name */
+:root{
+  --cream:#f3ece0; --paper:#fbf7ef; --ink:#29261f; --muted:#8c8372;
+  --olive:#4c5a3a; --magenta:#d6227e; --line:#e3d8c4;
+  --photo-opacity:1; --shadow:rgba(120,90,60,.35);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --cream:#1c1a16; --paper:#232019; --ink:#f1ead9; --muted:#a69b86;
+    --olive:#9db57e; --magenta:#ff6cb0; --line:#39352b;
+    --photo-opacity:.1; --shadow:rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --cream:#1c1a16; --paper:#232019; --ink:#f1ead9; --muted:#a69b86;
+  --olive:#9db57e; --magenta:#ff6cb0; --line:#39352b;
+  --photo-opacity:.1; --shadow:rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font-family:'Noto Sans KR','Inter',sans-serif;font-size:16px;
+  padding-left:max(16px, env(safe-area-inset-left,0px));
+  padding-right:max(16px, env(safe-area-inset-right,0px));
+  word-break:keep-all;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:url("images/bg.webp") center / 100% 100% no-repeat;
+  opacity:var(--photo-opacity);
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:2px solid var(--magenta);outline-offset:3px;border-radius:6px}
+h1,h2,h3,.disp{font-family:'Space Grotesk','Noto Sans KR',sans-serif;text-wrap:balance;letter-spacing:-0.01em;margin:0}
+p{line-height:1.85;margin:0}
+.wrap{max-width:1040px;margin:0 auto}
+.narrow{max-width:640px;margin-inline:auto}
+
+header.nav{padding-block:18px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line)}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.03em;line-height:1}
+.logo span{display:block;font-size:11px;letter-spacing:.2em;color:var(--muted);font-weight:500;margin-top:2px}
+.back{font-size:13px;font-weight:700;border:1px solid var(--line);border-radius:999px;padding:10px 18px;white-space:nowrap}
+
+.kicker{font-size:12px;letter-spacing:.18em;color:var(--muted);font-weight:700;text-transform:uppercase;margin-bottom:14px}
+
+/* opening */
+.open{padding-block:72px 56px;text-align:center}
+.open h1{font-size:clamp(34px,6vw,64px);font-weight:700;line-height:1.2}
+.open h1 .from{color:var(--olive)}
+.open h1 .to{color:var(--magenta)}
+.open .lede{margin-top:24px;color:var(--muted);font-size:17px}
+
+/* definition */
+.define{padding-block:24px 64px;display:flex;flex-direction:column;gap:18px;text-align:center}
+.define p.big{font-size:clamp(18px,2.2vw,22px);font-weight:500;line-height:1.8}
+.define p{color:var(--muted)}
+.define p.big{color:var(--ink)}
+
+/* FROM / TO */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding-block:32px 72px;align-items:start}
+.pair .side{display:flex;flex-direction:column;gap:18px;min-width:0}
+.pair .side.to{margin-top:96px}
+.pair figure{margin:0;aspect-ratio:4/5}
+.pair figure img{
+  width:100%;height:100%;object-fit:cover;
+  -webkit-mask-image:radial-gradient(ellipse 74% 74% at 50% 50%, #000 60%, transparent 100%);
+  mask-image:radial-gradient(ellipse 74% 74% at 50% 50%, #000 60%, transparent 100%);
+}
+.pair .label{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,4vw,44px);letter-spacing:-0.02em;line-height:1}
+.pair .from .label{color:var(--olive)}
+.pair .to .label{color:var(--magenta)}
+.pair .sub{font-weight:700;font-size:17px}
+.pair p{color:var(--muted);font-size:15px}
+@media (max-width:720px){
+  .pair{grid-template-columns:1fr;gap:48px}
+  .pair .side.to{margin-top:0}
+}
+.bridge{text-align:center;font-weight:700;font-size:clamp(18px,2.4vw,24px);padding-block:0 72px}
+
+/* story */
+.story{padding-block:56px 72px;border-top:1px solid var(--line)}
+.story .body{display:flex;flex-direction:column;gap:26px;margin-top:28px}
+.story h2{font-size:clamp(26px,3.6vw,38px)}
+.story .selves{display:flex;flex-direction:column;gap:6px;font-size:clamp(18px,2.2vw,22px);font-weight:500;line-height:1.7;padding-left:18px;border-left:2px solid var(--olive)}
+.selves.motion span{opacity:.18;transform:translateY(10px);transition:opacity .7s ease, transform .7s ease}
+.selves.motion.shown span{opacity:1;transform:none}
+.selves.motion.shown span:nth-child(2){transition-delay:.45s}
+.selves.motion.shown span:nth-child(3){transition-delay:.9s}
+.selves.motion.shown span:nth-child(4){transition-delay:1.35s}
+.pair figure{will-change:transform}
+.story p{font-size:16px}
+.story p.turn{font-weight:700;font-size:clamp(18px,2.2vw,22px)}
+.story .ask{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,36px);letter-spacing:-0.02em;margin-top:14px}
+.story .ask .from{color:var(--olive)} .story .ask .to{color:var(--magenta)}
+
+/* values */
+.values{padding-block:56px 72px;border-top:1px solid var(--line)}
+.values h2{font-size:clamp(24px,3vw,32px);margin-bottom:30px}
+.value-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media (max-width:900px){.value-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.value-grid{grid-template-columns:1fr}}
+.value{
+  background:color-mix(in srgb, var(--paper) 55%, transparent);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border:1px solid color-mix(in srgb, var(--line) 55%, transparent);
+  border-radius:20px;padding:24px 22px;display:flex;flex-direction:column;gap:12px;min-width:0;
+}
+.value h3{font-size:19px}
+.value p{font-size:14px;color:var(--muted);line-height:1.7}
+.value .say{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line);font-weight:700;font-size:14px;color:var(--ink)}
+
+/* voice */
+.voice{padding-block:56px 72px;border-top:1px solid var(--line)}
+.voice h2{font-size:clamp(24px,3vw,32px);margin-bottom:26px}
+.quotes{display:flex;flex-wrap:wrap;gap:12px}
+.quotes span{
+  border:1px solid var(--line);border-radius:999px;padding:12px 20px;font-size:15px;font-weight:500;
+  background:color-mix(in srgb, var(--paper) 55%, transparent);
+}
+.quotes span:nth-child(odd){transform:rotate(-1deg)}
+.quotes span:nth-child(even){transform:rotate(1deg)}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} .quotes span{transform:none} }
+
+/* closing */
+.close{padding-block:64px 80px;text-align:center;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:26px;align-items:center}
+.close .line{font-size:clamp(24px,4vw,40px);font-weight:700;font-family:'Space Grotesk','Noto Sans KR',sans-serif}
+.btn{display:inline-block;border-radius:999px;padding:14px 26px;font-size:14px;font-weight:700;background:var(--ink);color:var(--paper)}
+
+footer{border-top:1px solid var(--line);padding-block:36px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+footer .f-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--ink)}
+footer p{max-width:56ch;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="nav">
+    <a class="logo" href="index.html">WHERE WHERE<span>BRAND STORY</span></a>
+    <a class="back" href="index.html">← 제품 보러 가기</a>
+  </header>
+
+  <section class="open">
+    <p class="kicker">Brand Story</p>
+    <h1>여러 모습의 <span class="from">나</span>로,<br>나만의 <span class="to">방향</span>으로.</h1>
+    <p class="lede narrow">내 안의 다양한 나에서 출발해, 내가 선택한 방향으로 향합니다.</p>
+  </section>
+
+  <section class="define narrow">
+    <p class="big">WHERE WHERE는 내 안의 다양한 모습을 존중하고, 각자가 원하는 삶의 방향을 향할 자유를 지향하는 화장품 브랜드입니다.</p>
+    <p>우리는 한 사람 안에 여러 모습과 가능성이 함께 있다고 믿습니다. 익숙하게 드러내는 모습도, 아직 발견하지 못한 모습도, 언젠가 해보고 싶은 마음도 자신을 이루는 일부입니다.</p>
+  </section>
+
+  <section class="pair">
+    <div class="side from">
+      <figure><img src="images/story-read.webp" alt="창가 의자에 앉아 책을 읽는 사람"></figure>
+      <div class="label">WHERE FROM</div>
+      <div class="sub">내 안의 다양한 나로부터.</div>
+      <p>내가 좋아하는 것, 궁금한 것, 해보고 싶은 것. 이미 알고 있는 모습과 아직 꺼내 보지 않은 가능성이 함께 있는 내면이 브랜드가 바라보는 출발점입니다.</p>
+      <p>‘나’의 범위는 지금까지 해온 일과 익숙한 취향을 넘어, 앞으로 발견하고 표현할 수 있는 모습까지 열려 있습니다.</p>
+    </div>
+    <div class="side to">
+      <figure><img src="images/story-write.webp" alt="카페 창가에서 노트에 글을 쓰는 사람"></figure>
+      <div class="label">WHERE TO</div>
+      <div class="sub">내가 향하고 싶은 방향으로.</div>
+      <p>내 안의 여러 모습이 일상의 선택으로 이어지는 방향입니다. 오늘 가고 싶은 장소, 즐기고 싶은 활동, 함께하고 싶은 사람, 머무르고 싶은 시간에 그 선택이 담깁니다.</p>
+      <p>방향은 새롭게 정할 수도, 바꿀 수도, 잠시 열어둘 수도 있습니다. WHERE WHERE는 각자가 자신의 방식과 속도로 그 방향을 선택할 자유를 존중합니다.</p>
+    </div>
+  </section>
+
+  <p class="bridge">내 안의 다양한 나로부터, 내가 향하고 싶은 곳으로.</p>
+
+  <section class="story">
+    <div class="narrow">
+      <p class="kicker">Our Story</p>
+      <h2>내 안에는 여러 내가 있습니다.</h2>
+      <div class="body">
+        <div class="selves">
+          <span>아침 수영을 기다리는 나.</span>
+          <span>책장을 넘기다 시간을 잊는 나.</span>
+          <span>친구들과 한참 웃고 싶은 나.</span>
+          <span>오늘은 혼자가 좋은 나.</span>
+        </div>
+        <p>계획을 꼼꼼히 세워두고도 다른 길이 궁금해질 수 있습니다. 처음 해본 일에서 뜻밖의 취향을 발견할 수도 있습니다. 아직 시작하지 않았지만, 마음 한편에 해보고 싶은 일이 있을 수도 있고요.</p>
+        <p class="turn">WHERE WHERE는 그 다양한 나로부터 시작합니다.</p>
+        <p>이미 익숙한 모습도, 아직 꺼내 보지 않은 가능성도 함께 바라봅니다. 그리고 그 마음이 어디로 향할지 궁금해합니다.</p>
+        <p>산책을 나섰다가 빵집에 도착해도, 이번 주의 목적지가 소파여도 좋습니다. 오늘의 선택 안에도 나만의 취향과 방향이 있으니까요.</p>
+        <p>내 안의 여러 모습을 발견하고, 마음이 향하는 쪽으로 일상을 이어가는 것.</p>
+        <p>WHERE WHERE는 그렇게 각자의 방향으로 살아가는 다양한 나다움을 존중합니다.</p>
+        <div class="ask"><span class="from">WHERE FROM?</span> <span class="to">WHERE TO?</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="values">
+    <p class="kicker">Core Values</p>
+    <h2>우리가 지키는 네 가지</h2>
+    <div class="value-grid">
+      <div class="value">
+        <h3>다양성</h3>
+        <p>사람마다 다른 모습과 한 사람 안에 공존하는 여러 모습을 존중합니다.</p>
+        <div class="say">이런 나도, 저런 나도. 모두 나니까.</div>
+      </div>
+      <div class="value">
+        <h3>자율성</h3>
+        <p>각자가 자신의 방향과 속도를 선택할 자유를 존중합니다.</p>
+        <div class="say">우리는 각자의 방향으로.</div>
+      </div>
+      <div class="value">
+        <h3>변화</h3>
+        <p>취향과 관심, 삶의 방향이 달라지는 과정도 자연스럽게 받아들입니다.</p>
+        <div class="say">오늘은 다른 내가 마음에 들 수도.</div>
+      </div>
+      <div class="value">
+        <h3>발견</h3>
+        <p>내 안에 있던 관심과 가능성을 일상에서 알아가는 과정에 호기심을 갖습니다.</p>
+        <div class="say">나한테 이런 취향도 있었네.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="voice">
+    <p class="kicker">In Our Words</p>
+    <h2>오늘은 어떤 내가 나갈 차례?</h2>
+    <div class="quotes">
+      <span>낯가리는 나도, 마이크 잡은 나도.</span>
+      <span>분명 산책이었는데, 빵집에 도착했다.</span>
+      <span>오늘의 목적지는 소파. 이쪽도 내 방향.</span>
+      <span>계획표는 꼼꼼하게. 주말은 마음대로.</span>
+      <span>나한테 이런 취향도 있었네.</span>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="line">여러 모습의 나로, 나만의 방향으로.</div>
+    <a class="btn" href="index.html#products">제품 보러 가기</a>
+  </section>
+
+  <footer>
+    <div class="f-logo">WHERE WHERE</div>
+    <p>WHERE WHERE는 웨이브투웨이브의 화장품 브랜드입니다. 내 안의 다양한 나에서 출발해, 각자가 원하는 삶의 방향으로 향할 자유를 존중합니다. 본 페이지는 연습용 데모입니다.</p>
+  </footer>
+</div>
+<script>
+(function(){
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var selves = document.querySelector('.selves');
+  if(selves && 'IntersectionObserver' in window){
+    selves.classList.add('motion');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ selves.classList.add('shown'); io.disconnect(); }
+      });
+    }, {threshold:0.5});
+    io.observe(selves);
+  }
+
+  var figs = [
+    {el: document.querySelector('.pair .from figure'), k: 0.07},
+    {el: document.querySelector('.pair .to figure'), k: -0.07}
+  ].filter(function(f){ return f.el; });
+  var ticking = false;
+  function update(){
+    ticking = false;
+    var vh = window.innerHeight;
+    figs.forEach(function(f){
+      var r = f.el.parentElement.getBoundingClientRect();
+      if(r.bottom < -200 || r.top > vh + 200) return;
+      var top = r.top + f.el.offsetTop - f.el.parentElement.offsetTop;
+      var center = r.top + f.el.offsetHeight / 2;
+      var shift = Math.max(-40, Math.min(40, (center - vh / 2) * f.k));
+      f.el.style.transform = 'translate3d(0,' + shift.toFixed(1) + 'px,0)';
+    });
+  }
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+</script>
+</body>
+</html>

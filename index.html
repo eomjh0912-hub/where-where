@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="WHERE WHERE 화장품 브랜드 데모 사이트">
+<style>body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>WHERE WHERE</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* layout: single-column editorial scroll — hero, two product spotlights (olive / magenta), instagram grid, review wall, footer */
+:root{
+  --cream:#f3ece0;
+  --paper:#fbf7ef;
+  --ink:#29261f;
+  --muted:#8c8372;
+  --olive:#4c5a3a;
+  --olive-deep:#273224;
+  --magenta:#d6227e;
+  --magenta-deep:#7a1049;
+  --line:#e3d8c4;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --cream:#1c1a16;
+    --paper:#232019;
+    --ink:#f1ead9;
+    --muted:#a69b86;
+    --olive:#9db57e;
+    --olive-deep:#c9dba8;
+    --magenta:#ff6cb0;
+    --magenta-deep:#ffa3cf;
+    --line:#39352b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --cream:#1c1a16;
+  --paper:#232019;
+  --ink:#f1ead9;
+  --muted:#a69b86;
+  --olive:#9db57e;
+  --olive-deep:#c9dba8;
+  --magenta:#ff6cb0;
+  --magenta-deep:#ffa3cf;
+  --line:#39352b;
+  color-scheme: dark;
+}
+
+*{box-sizing:border-box}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:url("images/bg.webp") center / 100% 100% no-repeat;
+  opacity:var(--photo-opacity, 1);
+}
+:root{ --photo-blend:multiply; --shadow:rgba(120,90,60,.35) }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --photo-opacity:.1; --photo-blend:normal; --shadow:rgba(0,0,0,.6) } }
+:root[data-theme="dark"]{ --photo-opacity:.1; --photo-blend:normal; --shadow:rgba(0,0,0,.6) }
+:root[data-theme="light"]{ --photo-opacity:1; --photo-blend:multiply; --shadow:rgba(120,90,60,.35) }
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Noto Sans KR','Inter',sans-serif;
+  padding-left:max(16px, env(safe-area-inset-left,0px));
+  padding-right:max(16px, env(safe-area-inset-right,0px));
+}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3,.disp{font-family:'Space Grotesk','Noto Sans KR',sans-serif; text-wrap:balance; letter-spacing:-0.01em}
+p{line-height:1.7}
+a{color:inherit}
+img{display:block}
+
+/* ---- top bar ---- */
+header.nav{
+  padding-block:18px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--line);
+}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.03em;line-height:1}
+.logo span{display:block;font-size:11px;letter-spacing:.2em;color:var(--muted);font-weight:500;margin-top:2px}
+nav.links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--muted)}
+nav.links a:hover{color:var(--ink)}
+@media (max-width:640px){ nav.links{display:none} }
+
+/* ---- neon ticker ---- */
+.ticker{
+  --neon-bg:#17140f; --neon-pink:#ff4fa8; --neon-green:#b6e58a;
+  background:var(--neon-bg);overflow:hidden;padding-block:12px;
+  margin-left:calc(-1 * max(16px, env(safe-area-inset-left,0px)));
+  margin-right:calc(-1 * max(16px, env(safe-area-inset-right,0px)));
+}
+.ticker-track{display:flex;width:max-content;animation:ticker 28s linear infinite}
+.ticker-track span{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;letter-spacing:.08em;
+  white-space:nowrap;padding-inline:22px;color:var(--neon-pink);
+  text-shadow:0 0 6px var(--neon-pink), 0 0 18px color-mix(in srgb, var(--neon-pink) 60%, transparent);
+}
+.ticker-track span:nth-child(even){
+  color:var(--neon-green);
+  text-shadow:0 0 6px var(--neon-green), 0 0 18px color-mix(in srgb, var(--neon-green) 60%, transparent);
+}
+@keyframes ticker{ to{ transform:translateX(-50%) } }
+@media (prefers-reduced-motion: reduce){ .ticker-track{animation:none} }
+
+/* ---- hero ---- */
+.hero{
+  display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;
+  padding-block:56px 64px;align-items:center;
+}
+@media (max-width:860px){ .hero{grid-template-columns:1fr; padding-block:36px 40px} }
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;letter-spacing:.14em;color:var(--olive);
+  background:color-mix(in srgb, var(--olive) 12%, transparent);
+  border-radius:999px;padding:6px 14px;font-weight:700;margin-bottom:18px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .eyebrow{color:var(--olive-deep)}}
+:root[data-theme="dark"] .eyebrow{color:var(--olive-deep)}
+.hero h1{font-size:clamp(34px,5.2vw,60px);font-weight:700;margin:0 0 18px}
+.hero h1 em{font-style:normal;color:var(--magenta)}
+.hero p.lede{font-size:17px;color:var(--muted);max-width:46ch;margin:0 0 30px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  border:none;border-radius:999px;padding:14px 26px;font-size:14px;font-weight:700;
+  cursor:pointer;font-family:inherit;
+}
+.btn-dark{background:var(--ink);color:var(--paper)}
+.btn-outline{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.hero-figure{position:relative;aspect-ratio:4/5}
+.hero-figure img{
+  width:100%;height:100%;object-fit:cover;
+  -webkit-mask-image:radial-gradient(ellipse 72% 72% at 50% 50%, #000 58%, transparent 100%);
+  mask-image:radial-gradient(ellipse 72% 72% at 50% 50%, #000 58%, transparent 100%);
+}
+.hero-tag{
+  position:absolute;left:18px;bottom:18px;background:var(--paper);
+  border-radius:16px;padding:12px 16px;display:flex;gap:10px;align-items:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.18);
+}
+.hero-tag .dot{width:8px;height:8px;border-radius:50%;background:var(--magenta)}
+.hero-tag .txt{font-size:12px;font-weight:600;color:var(--muted)}
+
+/* ---- section heading ---- */
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:28px}
+.section-head .kicker{font-size:12px;letter-spacing:.16em;color:var(--muted);font-weight:700;text-transform:uppercase;margin:0 0 8px}
+.section-head h2{font-size:clamp(24px,3vw,34px);margin:0;font-weight:700}
+.section-head p{color:var(--muted);font-size:14px;margin:8px 0 0;max-width:40ch}
+
+/* ---- products ---- */
+section.products{padding-block:60px}
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media (max-width:760px){.product-grid{grid-template-columns:1fr}}
+.card{
+  background:color-mix(in srgb, var(--paper) 55%, transparent);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-radius:26px;overflow:hidden;
+  border:1px solid color-mix(in srgb, var(--line) 55%, transparent);
+  box-shadow:0 18px 50px -24px var(--shadow);
+  display:flex;flex-direction:column;
+}
+.card .media{position:relative;aspect-ratio:1/1;overflow:hidden}
+.card .media img{
+  width:100%;height:100%;object-fit:cover;mix-blend-mode:var(--photo-blend);
+  -webkit-mask-image:linear-gradient(#000 78%, transparent 100%);
+  mask-image:linear-gradient(#000 78%, transparent 100%);
+}
+.card .media .line-tag{
+  position:absolute;top:16px;left:16px;font-size:11px;font-weight:700;letter-spacing:.08em;
+  padding:6px 12px;border-radius:999px;color:#fff;
+}
+.card .body{padding:26px 26px 28px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card .name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px}
+.card .desc{color:var(--muted);font-size:14px;margin:0}
+.card .meta{display:flex;align-items:baseline;justify-content:space-between;margin-top:auto;padding-top:14px;border-top:1px dashed var(--line)}
+.card .price{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px}
+.card .price .was{font-size:13px;color:var(--muted);font-weight:500;text-decoration:line-through;margin-right:8px}
+.card .stars{font-size:12px;color:var(--muted)}
+.card-olive .line-tag{background:var(--olive-deep)}
+.card-olive .price{color:var(--olive)}
+.card-magenta .line-tag{background:var(--magenta-deep)}
+.card-magenta .price{color:var(--magenta)}
+.card .addbtn{
+  margin-top:14px;border:none;border-radius:999px;padding:13px;font-weight:700;font-size:14px;
+  cursor:pointer;color:#fff;font-family:inherit;
+}
+.card-olive .addbtn{background:var(--olive)}
+.card-magenta .addbtn{background:var(--magenta)}
+.card .note{font-size:11px;color:var(--muted);text-align:center;margin-top:8px}
+
+/* ---- instagram ---- */
+section.insta{padding-block:60px}
+.insta-head{display:flex;align-items:center;gap:14px;margin-bottom:26px;flex-wrap:wrap}
+.insta-avatar{
+  width:46px;height:46px;border-radius:50%;
+  background:conic-gradient(from 220deg, var(--magenta), var(--olive), var(--magenta));
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.insta-avatar span{width:40px;height:40px;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;font-family:'Space Grotesk',sans-serif}
+.insta-handle{font-weight:700;font-size:15px}
+.insta-handle .sub{display:block;font-weight:500;font-size:12px;color:var(--muted);margin-top:2px}
+.insta-follow{margin-left:auto;border:1px solid var(--line);background:transparent;border-radius:999px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;color:inherit;font-family:inherit}
+.insta-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+@media (max-width:760px){.insta-grid{grid-template-columns:repeat(3,1fr)}}
+.insta-item{position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;cursor:default;transition:transform .35s ease;box-shadow:0 14px 30px -16px var(--shadow)}
+.insta-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.insta-item:hover{transform:rotate(0deg) scale(1.02)}
+.insta-item:hover img{transform:scale(1.06)}
+.insta-grid .insta-item:nth-child(1){transform:rotate(-2deg)}
+.insta-grid .insta-item:nth-child(2){transform:rotate(1.5deg)}
+.insta-grid .insta-item:nth-child(3){transform:rotate(-1deg)}
+.insta-grid .insta-item:nth-child(4){transform:rotate(2deg)}
+.insta-grid .insta-item:nth-child(5){transform:rotate(-1.5deg)}
+.insta-grid .insta-item:nth-child(6){transform:rotate(1deg)}
+@media (prefers-reduced-motion: reduce){ .insta-item{transform:none!important;transition:none} }
+.insta-overlay{
+  position:absolute;inset:0;background:rgba(20,16,10,.0);
+  display:flex;align-items:flex-end;padding:10px;opacity:0;transition:opacity .25s ease;
+}
+.insta-item:hover .insta-overlay{opacity:1;background:rgba(20,16,10,.38)}
+.insta-overlay .stats{color:#fff;font-size:12px;font-weight:700;display:flex;gap:12px}
+
+.insta-item{cursor:zoom-in}
+.insta-item:focus-visible{outline:2px solid var(--magenta);outline-offset:3px}
+.zoom{
+  position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
+  padding:max(20px, env(safe-area-inset-top,0px)) max(20px, env(safe-area-inset-right,0px)) max(20px, env(safe-area-inset-bottom,0px)) max(20px, env(safe-area-inset-left,0px));
+  background:rgba(20,16,10,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  cursor:zoom-out;animation:zoom-fade .25s ease;
+}
+.zoom img{
+  max-width:min(520px, 100%);max-height:82vh;border-radius:18px;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.6);animation:zoom-pop .3s cubic-bezier(.2,.8,.3,1);
+}
+@keyframes zoom-fade{ from{opacity:0} }
+@keyframes zoom-pop{ from{transform:scale(.88);opacity:0} }
+@media (prefers-reduced-motion: reduce){ .zoom, .zoom img{animation:none} }
+
+/* ---- reviews ---- */
+section.reviews{padding-block:60px 70px}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:860px){.review-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.review-grid{grid-template-columns:1fr}}
+.review{background:color-mix(in srgb, var(--paper) 55%, transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid color-mix(in srgb, var(--line) 55%, transparent);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.review .stars-row{color:var(--magenta);font-size:14px;letter-spacing:2px}
+.review .stars-row.olive{color:var(--olive)}
+.review p{font-size:14px;margin:0;color:var(--ink)}
+.review .who{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);margin-top:auto;padding-top:10px;border-top:1px solid var(--line)}
+.review .who b{color:var(--ink);font-weight:700}
+.review .tag{display:inline-block;align-self:flex-start;font-size:10px;font-weight:700;letter-spacing:.06em;padding:4px 10px;border-radius:999px;color:#fff;margin-bottom:-2px}
+.review.olive-tag .tag{background:var(--olive)}
+.review.magenta-tag .tag{background:var(--magenta)}
+.rating-summary{display:flex;align-items:center;gap:22px;margin-bottom:30px;flex-wrap:wrap}
+.rating-summary .score{font-family:'Space Grotesk',sans-serif;font-size:46px;font-weight:700;line-height:1}
+.rating-summary .stars-row{font-size:18px;color:var(--magenta)}
+.rating-summary .count{font-size:13px;color:var(--muted)}
+
+/* ---- footer ---- */
+footer{border-top:1px solid var(--line);padding-block:40px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+footer .f-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--ink)}
+footer .disclaimer{max-width:50ch}
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span><span>WHERE WHERE</span>
+  </div>
+</div>
+<div class="wrap">
+  <header class="nav">
+    <div class="logo">WHERE WHERE<span>CLEAN SKINCARE LAB</span></div>
+    <nav class="links">
+      <a href="#products">제품</a>
+      <a href="#instagram">인스타그램</a>
+      <a href="#reviews">리뷰</a>
+      <a href="story.html">브랜드 스토리</a>
+    </nav>
+    <button class="btn btn-dark" style="padding:10px 20px;font-size:13px">장바구니</button>
+  </header>
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">● NEW · GREEN TEA LINE</span>
+      <h1>내 피부가 머무는 곳,<br><em>WHERE WHERE</em></h1>
+      <p class="lede">그린티 추출물과 비타민 B12, 두 가지 결을 가진 포뮬러로 매일의 피부 컨디션을 만듭니다. 묻는 순간 편안해지는 질감을 느껴보세요.</p>
+      <div class="hero-actions">
+        <button class="btn btn-dark">베스트셀러 보기</button>
+        <a class="btn btn-outline" href="story.html" style="text-decoration:none;display:inline-block">브랜드 스토리</a>
+      </div>
+    </div>
+    <div class="hero-figure">
+      <img src="images/6.webp" alt="WHERE WHERE 그린티 크림을 바르는 모델" loading="lazy">
+      <div class="hero-tag">
+        <span class="dot"></span>
+        <span class="txt">GREEN TEA CREAM 50mL 사용 중</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="products" id="products">
+    <div class="section-head">
+      <div>
+        <p class="kicker">Best Sellers</p>
+        <h2>지금 가장 많이 찾는 두 가지</h2>
+        <p>피부 타입과 고민에 따라 고르는 WHERE WHERE의 시그니처 라인.</p>
+      </div>
+    </div>
+
+    <div class="product-grid">
+      <div class="card card-olive">
+        <div class="media">
+          <span class="line-tag">GREEN TEA</span>
+          <img src="images/1.webp" alt="그린티 크림 50mL 자켓샷" loading="lazy">
+        </div>
+        <div class="body">
+          <div class="name">그린티 크림 50mL</div>
+          <p class="desc">진정 그린티 추출물 72% 함유. 산뜻하게 스며들어 번들거림 없이 수분 장벽을 채워주는 데일리 크림.</p>
+          <div class="stars">★★★★★ <span style="color:var(--muted)"><b class="count-up" data-target="4.8">0.0</b> (312개 리뷰)</span></div>
+          <div class="meta">
+            <div class="price"><span class="was">38,000원</span>32,000원</div>
+          </div>
+          <button class="addbtn">장바구니에 담기</button>
+          <p class="note">연습용 데모 페이지입니다. 실제 결제는 진행되지 않습니다.</p>
+        </div>
+      </div>
+
+      <div class="card card-magenta">
+        <div class="media">
+          <span class="line-tag">VITAMIN B12</span>
+          <img src="images/2.webp" alt="비타민 B12 크림 30mL 자켓샷" loading="lazy">
+        </div>
+        <div class="body">
+          <div class="name">비타민 B12 크림 30mL</div>
+          <p class="desc">고농축 비타민 B12로 칙칙한 피부톤에 생기를 더하는 톤업 케어. 끈적임 없는 쫀득한 젤 크림 타입.</p>
+          <div class="stars">★★★★★ <span style="color:var(--muted)"><b class="count-up" data-target="4.9">0.0</b> (287개 리뷰)</span></div>
+          <div class="meta">
+            <div class="price"><span class="was">32,000원</span>28,000원</div>
+          </div>
+          <button class="addbtn">장바구니에 담기</button>
+          <p class="note">연습용 데모 페이지입니다. 실제 결제는 진행되지 않습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="insta" id="instagram">
+    <div class="insta-head">
+      <div class="insta-avatar"><span>WW</span></div>
+      <div class="insta-handle">@wherewhere.official<span class="sub">인스타그램에서 더 많은 사용컷 보기</span></div>
+      <button class="insta-follow">팔로우</button>
+    </div>
+    <div class="insta-grid">
+      <div class="insta-item"><img src="images/3.webp" alt="비타민 B12 크림을 바르는 모델" loading="lazy">
+        <div class="insta-overlay"><div class="stats">♥ 1.2k 💬 48</div></div>
+      </div>
+      <div class="insta-item"><img src="images/4.webp" alt="그린티 크림을 바르는 모델" loading="lazy">
+        <div class="insta-overlay"><div class="stats">♥ 980 💬 31</div></div>
+      </div>
+      <div class="insta-item"><img src="images/5.webp" alt="비타민 B12 크림 텍스처 클로즈업" loading="lazy">
+        <div class="insta-overlay"><div class="stats">♥ 1.5k 💬 62</div></div>
+      </div>
+      <div class="insta-item"><img src="images/6.webp" alt="그린티 크림 잔을 들고 있는 모델" loading="lazy">
+        <div class="insta-overlay"><div class="stats">♥ 2.1k 💬 77</div></div>
+      </div>
+      <div class="insta-item"><img src="images/1.webp" alt="그린티 크림 오픈샷" loading="lazy">
+        <div class="insta-overlay"><div class="stats">♥ 860 💬 19</div></div>
+      </div>
+      <div class="insta-item"><img src="images/2.webp" alt="비타민 B12 크림 텍스처샷" loading="lazy">
+        <div class="insta-overlay"><div class="stats">♥ 1.0k 💬 27</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews" id="reviews">
+    <div class="section-head">
+      <div>
+        <p class="kicker">Customer Reviews</p>
+        <h2>직접 써본 사람들의 이야기</h2>
+      </div>
+    </div>
+    <div class="rating-summary">
+      <div class="score count-up" data-target="4.8">0.0</div>
+      <div>
+        <div class="stars-row">★★★★★</div>
+        <div class="count">전체 599개 리뷰 기준</div>
+      </div>
+    </div>
+    <div class="review-grid">
+      <div class="review olive-tag">
+        <span class="tag">GREEN TEA CREAM</span>
+        <div class="stars-row olive">★★★★★</div>
+        <p>예민한 피부라 크림 바꾸는 게 늘 무서웠는데 트러블 없이 잘 맞았어요. 발랐을 때 끈적임이 전혀 없고 다음날 아침 피부가 한결 편안해진 느낌이에요.</p>
+        <div class="who"><b>최﹡영</b><span>구매 인증 · 2026.09.12</span></div>
+      </div>
+      <div class="review magenta-tag">
+        <span class="tag">VITAMIN B12</span>
+        <div class="stars-row">★★★★★</div>
+        <p>칙칙했던 턱 라인이 2주 만에 확실히 밝아졌어요. 양을 많이 안 써도 쫀득하게 잘 퍼지고, 향도 과하지 않아서 매일 쓰기 좋습니다.</p>
+        <div class="who"><b>박﹡아</b><span>구매 인증 · 2026.10.03</span></div>
+      </div>
+      <div class="review olive-tag">
+        <span class="tag">GREEN TEA CREAM</span>
+        <div class="stars-row olive">★★★★☆</div>
+        <p>수분감은 정말 만족스러운데 겨울엔 살짝 더 묵직한 크림이랑 같이 써야 할 것 같아요. 그래도 재구매 의사 있습니다.</p>
+        <div class="who"><b>이﹡준</b><span>구매 인증 · 2026.08.27</span></div>
+      </div>
+      <div class="review magenta-tag">
+        <span class="tag">VITAMIN B12</span>
+        <div class="stars-row">★★★★★</div>
+        <p>화장 전 톤업 크림 대신 쓰고 있어요. 바르자마자 생기 도는 느낌이 들어서 아침마다 기분 좋게 시작합니다. 패키지도 예뻐서 선물용으로도 샀어요.</p>
+        <div class="who"><b>정﹡현</b><span>구매 인증 · 2026.10.21</span></div>
+      </div>
+      <div class="review olive-tag">
+        <span class="tag">GREEN TEA CREAM</span>
+        <div class="stars-row olive">★★★★★</div>
+        <p>지성 피부라 크림 바르면 번들거리는 게 싫었는데 이건 흡수가 빨라서 그 위에 선크림 발라도 밀리지 않아요. 용량도 넉넉한 편이에요.</p>
+        <div class="who"><b>한﹡서</b><span>구매 인증 · 2026.07.15</span></div>
+      </div>
+      <div class="review magenta-tag">
+        <span class="tag">VITAMIN B12</span>
+        <div class="stars-row">★★★★★</div>
+        <p>튜브 디자인이 너무 예뻐서 충동구매했는데 효과도 좋아서 놀랐어요. 피곤해서 칙칙해 보이는 날 하나 바르면 바로 혈색이 도는 느낌!</p>
+        <div class="who"><b>오﹡민</b><span>구매 인증 · 2026.09.30</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="f-logo">WHERE WHERE</div>
+    <p class="disclaimer">본 페이지는 디자인 연습을 위해 제작된 데모 사이트이며, 표기된 상품·가격·리뷰는 실제 거래와 무관한 예시 콘텐츠입니다.</p>
+  </footer>
+</div>
+
+<div class="zoom" id="insta-zoom" role="dialog" aria-label="인스타그램 사진 확대" hidden><img alt=""></div>
+<script>
+(function(){
+  var zoom = document.getElementById('insta-zoom');
+  var zoomImg = zoom.querySelector('img');
+  var last = null;
+  function open(item){
+    var src = item.querySelector('img');
+    zoomImg.src = src.src; zoomImg.alt = src.alt;
+    last = item; zoom.hidden = false;
+  }
+  function close(){
+    if(zoom.hidden) return;
+    zoom.hidden = true;
+    if(last) last.focus();
+  }
+  document.querySelectorAll('.insta-item').forEach(function(item){
+    item.tabIndex = 0;
+    item.setAttribute('role', 'button');
+    item.addEventListener('click', function(){ open(item); });
+    item.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(item); }
+    });
+  });
+  zoom.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+})();
+</script>
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.count-up');
+  if(!els.length) return;
+  if(reduce){
+    els.forEach(function(el){ el.textContent = parseFloat(el.dataset.target).toFixed(1); });
+    return;
+  }
+  var animate = function(el){
+    var target = parseFloat(el.dataset.target) || 0;
+    var start = performance.now();
+    var dur = 900;
+    function step(now){
+      var p = Math.min(1, (now - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(1);
+      if(p < 1) requestAnimationFrame(step);
+      else el.textContent = target.toFixed(1);
+    }
+    requestAnimationFrame(step);
+  };
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          animate(entry.target);
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.6});
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    els.forEach(animate);
+  }
+})();
+</script>
+</body>
+</html>
